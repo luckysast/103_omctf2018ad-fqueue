@@ -1,0 +1,24 @@
+version: "2"
+services:
+  fqueue:
+    build:
+      context: ./fqueue
+      dockerfile: ./Dockerfile
+    container_name: "fqueue"
+    image: omctf2018ad-fqueue:v1.2
+    ports:
+      - "5535:5535"
+    links:
+      - omctf-redis
+    depends_on:
+      - omctf-redis
+    restart: always
+  omctf-redis:
+    build:
+      context: ./redis
+      dockerfile: ./Dockerfile
+    container_name: "omctf-redis"
+    image: omctf2018ad-redis:v1.2
+    ports:
+      - "6379:6379"
+    restart: always
